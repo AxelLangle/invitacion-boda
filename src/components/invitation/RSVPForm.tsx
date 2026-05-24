@@ -15,6 +15,7 @@ export default function RSVPForm() {
   const [companion, setCompanion] = useState("");
   const [selectedEvents, setSelectedEvents] = useState<EventType[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
 
   const slideVariants = {
     enter: { x: 50, opacity: 0 },
@@ -22,8 +23,11 @@ export default function RSVPForm() {
     exit: { x: -50, opacity: 0 },
   };
 
-  const handleLookup = () => {
-    const found = findGuest(name.trim());
+  const handleLookup = async () => {
+    setIsSearching(true);
+    const found = await findGuest(name.trim());
+    setIsSearching(false);
+    
     if (found) {
       setGuest(found);
       if (found.plusOne) {
@@ -48,16 +52,14 @@ export default function RSVPForm() {
     );
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!guest || selectedEvents.length === 0) return;
     setIsSubmitting(true);
 
-    // Simulate a brief delay for UX
-    setTimeout(() => {
-      confirmAttendance(guest.id, selectedEvents, companion || undefined);
-      setIsSubmitting(false);
-      setStep("success");
-    }, 800);
+    await confirmAttendance(guest.id, selectedEvents, companion || undefined);
+    
+    setIsSubmitting(false);
+    setStep("success");
   };
 
   const handleReset = () => {
@@ -133,12 +135,22 @@ export default function RSVPForm() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={handleLookup}
-                disabled={!name.trim()}
+                disabled={!name.trim() || isSearching}
                 className="w-full mt-5 py-3 rounded-xl bg-[#800020] text-white tracking-wider uppercase text-sm shadow-lg hover:bg-[#800020]/90 transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 style={{ fontFamily: "Lato, sans-serif" }}
               >
-                <Search className="w-4 h-4" />
-                Buscar mi invitación
+                {isSearching ? (
+                  <motion.div
+                    className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full"
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                  />
+                ) : (
+                  <>
+                    <Search className="w-4 h-4" />
+                    Buscar mi invitación
+                  </>
+                )}
               </motion.button>
             </motion.div>
           )}
