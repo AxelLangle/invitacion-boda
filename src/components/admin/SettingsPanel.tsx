@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { Save, CheckCircle2, Image, Gift, Link } from "lucide-react";
 import { getAdminSettings, saveAdminSettings } from "@/lib/supabase";
@@ -13,14 +13,21 @@ export default function SettingsPanel() {
     giftListUrl: "",
   });
   const [saved, setSaved] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const current = getAdminSettings();
-    setSettings(current);
+    async function load() {
+      const current = await getAdminSettings();
+      setSettings(current);
+      setIsLoading(false);
+    }
+    load();
   }, []);
 
-  const handleSave = () => {
-    saveAdminSettings(settings);
+  const handleSave = async () => {
+    setIsLoading(true);
+    await saveAdminSettings(settings);
+    setIsLoading(false);
     setSaved(true);
     setTimeout(() => setSaved(false), 2500);
   };
@@ -83,7 +90,8 @@ export default function SettingsPanel() {
                 setSettings({ ...settings, [field.key]: e.target.value })
               }
               placeholder={field.placeholder}
-              className="w-full px-4 py-3 rounded-xl bg-white/50 border border-[#D4A853]/30 text-[#2D2D2D] text-sm placeholder:text-[#6B6B6B]/40 focus:outline-none focus:ring-2 focus:ring-[#D4A853]/50 transition-all duration-300"
+              disabled={isLoading}
+              className="w-full px-4 py-3 rounded-xl bg-white/50 border border-[#D4A853]/30 text-[#2D2D2D] text-sm placeholder:text-[#6B6B6B]/40 focus:outline-none focus:ring-2 focus:ring-[#D4A853]/50 transition-all duration-300 disabled:opacity-50"
               style={{ fontFamily: "Lato, sans-serif" }}
             />
           </div>
@@ -92,16 +100,23 @@ export default function SettingsPanel() {
 
       <motion.button
         onClick={handleSave}
+        disabled={isLoading}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
-        className={`mt-6 px-6 py-3 rounded-xl text-white text-sm tracking-wider uppercase shadow-lg transition-all duration-300 flex items-center gap-2 ${
+        className={`mt-6 px-6 py-3 rounded-xl text-white text-sm tracking-wider uppercase shadow-lg transition-all duration-300 flex items-center gap-2 disabled:opacity-50 ${
           saved
             ? "bg-green-600 hover:bg-green-600"
             : "bg-[#D4A853] hover:bg-[#D4A853]/90"
         }`}
         style={{ fontFamily: "Lato, sans-serif" }}
       >
-        {saved ? (
+        {isLoading ? (
+          <motion.div
+            className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+          />
+        ) : saved ? (
           <>
             <CheckCircle2 className="w-4 h-4" />
             ¡Guardado!
