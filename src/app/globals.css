@@ -1,0 +1,135 @@
+@import "tailwindcss";
+
+/* =====================================================
+   WEDDING DESIGN SYSTEM — Axel & Nahomi
+   ===================================================== */
+
+@theme inline {
+  /* Color Palette */
+  --color-wedding-champagne: #F7E7CE;
+  --color-wedding-gold: #D4A853;
+  --color-wedding-dusty-rose: #D4A0A0;
+  --color-wedding-burgundy: #800020;
+  --color-wedding-ivory: #FFFFF0;
+  --color-wedding-oatmeal: #E8DCC8;
+  --color-wedding-charcoal: #2D2D2D;
+  --color-wedding-warm-gray: #6B6B6B;
+
+  /* Fonts */
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+
+  /* Custom animations */
+  --animate-gradient-shift: gradient-shift 8s ease infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-fade-in-up: fade-in-up 0.6s ease-out forwards;
+  --animate-pulse-soft: pulse-soft 3s ease-in-out infinite;
+  --animate-shimmer: shimmer 3s linear infinite;
+  --animate-spin-slow: spin 8s linear infinite;
+}
+
+/* Keyframes */
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes fade-in-up {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* =====================================================
+   BASE STYLES
+   ===================================================== */
+
+:root {
+  --background: #FFFFF0;
+  --foreground: #2D2D2D;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), 'Lato', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Heading font utility */
+.font-heading {
+  font-family: var(--font-heading), 'Cormorant Garamond', serif;
+}
+
+.font-body {
+  font-family: var(--font-body), 'Lato', sans-serif;
+}
+
+/* =====================================================
+   CUSTOM SCROLLBAR
+   ===================================================== */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F7E7CE;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D4A853;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #800020;
+}
+
+/* =====================================================
+   UTILITY CLASSES
+   ===================================================== */
+
+/* Selection color */
+::selection {
+  background: #D4A853;
+  color: #FFFFF0;
+}
+
+/* Tabular nums for countdown */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Glass card */
+.glass-card {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background: rgba(255, 255, 240, 0.4);
+  border: 1px solid rgba(212, 168, 83, 0.15);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+}
+
+/* Shimmer divider */
+.shimmer-divider {
+  background: linear-gradient(90deg, transparent, #D4A853, transparent);
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+}
