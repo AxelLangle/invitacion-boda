@@ -1,0 +1,36 @@
+"use client";
+
+import { motion } from "motion/react";
+import { CalendarPlus } from "lucide-react";
+import { downloadICS } from "@/lib/calendar";
+
+export default function CalendarButton() {
+  return (
+    <motion.section
+      className="py-8 flex justify-center px-4"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+    >
+      <motion.button
+        onClick={downloadICS}
+        className="group flex items-center gap-3 px-8 py-4 bg-[#800020] text-[#FFFFF0] rounded-2xl shadow-lg shadow-[#800020]/20 hover:shadow-xl hover:shadow-[#800020]/30 transition-all duration-300"
+        whileHover={{ scale: 1.03, y: -2 }}
+        whileTap={{ scale: 0.98 }}
+      >
+        <motion.div
+          className="transition-transform duration-300 group-hover:rotate-12"
+        >
+          <CalendarPlus className="w-5 h-5" />
+        </motion.div>
+        <span
+          className="text-sm md:text-base tracking-[0.1em] uppercase font-light"
+          style={{ fontFamily: "Lato, sans-serif" }}
+        >
+          Añádelo a tu calendario
+        </span>
+      </motion.button>
+    </motion.section>
+  );
+}
