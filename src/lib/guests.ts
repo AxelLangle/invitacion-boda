@@ -1,20 +1,5 @@
 import { Guest, EventType } from '@/types';
-
-const STORAGE_KEY = 'wedding_guests';
-
-// Pre-defined guest list
-const INITIAL_GUESTS: Guest[] = [
-  { id: '1', fullName: 'Juan Pérez', plusOne: true, companion: '', attendingEvents: [], confirmed: false, confirmedAt: '' },
-  { id: '2', fullName: 'María López', plusOne: false, companion: '', attendingEvents: [], confirmed: false, confirmedAt: '' },
-  { id: '3', fullName: 'Carlos García', plusOne: true, companion: '', attendingEvents: [], confirmed: false, confirmedAt: '' },
-  { id: '4', fullName: 'Ana Martínez', plusOne: false, companion: '', attendingEvents: [], confirmed: false, confirmedAt: '' },
-  { id: '5', fullName: 'Roberto Hernández', plusOne: true, companion: '', attendingEvents: [], confirmed: false, confirmedAt: '' },
-  { id: '6', fullName: 'Laura Sánchez', plusOne: false, companion: '', attendingEvents: [], confirmed: false, confirmedAt: '' },
-  { id: '7', fullName: 'Diego Ramírez', plusOne: true, companion: '', attendingEvents: [], confirmed: false, confirmedAt: '' },
-  { id: '8', fullName: 'Sofía Torres', plusOne: false, companion: '', attendingEvents: [], confirmed: false, confirmedAt: '' },
-  { id: '9', fullName: 'Fernando Díaz', plusOne: true, companion: '', attendingEvents: [], confirmed: false, confirmedAt: '' },
-  { id: '10', fullName: 'Valentina Flores', plusOne: false, companion: '', attendingEvents: [], confirmed: false, confirmedAt: '' },
-];
+import { supabase } from './supabase';
 
 function normalizeString(str: string): string {
   return str
@@ -24,58 +9,86 @@ function normalizeString(str: string): string {
     .trim();
 }
 
-function initGuests(): Guest[] {
-  if (typeof window === 'undefined') return INITIAL_GUESTS;
-  const stored = localStorage.getItem(STORAGE_KEY);
-  if (!stored) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(INITIAL_GUESTS));
-    return INITIAL_GUESTS;
-  }
-  return JSON.parse(stored);
+export async function getAllGuests(): Promise<Guest[]> {
+  const { data, error } = await supabase
+    .from('guests')
+    .select('*')
+    .order('full_name', { ascending: true });
+
+  if (error || !data) return [];
+
+  return data.map(mapDbGuestToGuest);
 }
 
-export function getAllGuests(): Guest[] {
-  return initGuests();
-}
+export async function findGuest(name: string): Promise<Guest | null> {
+  const { data, error } = await supabase
+    .from('guests')
+    .select('*');
 
-export function findGuest(name: string): Guest | null {
-  const guests = initGuests();
+  if (error || !data) return null;
+
   const normalized = normalizeString(name);
-  return guests.find(g => normalizeString(g.fullName) === normalized) || null;
+  const found = data.find(g => normalizeString(g.full_name) === normalized);
+  
+  return found ? mapDbGuestToGuest(found) : null;
 }
 
-export function confirmAttendance(
+export async function confirmAttendance(
   guestId: string,
   events: EventType[],
   companion?: string
-): Guest | null {
-  const guests = initGuests();
-  const index = guests.findIndex(g => g.id === guestId);
-  if (index === -1) return null;
+): Promise<Guest | null> {
+  const { data, error } = await supabase
+    .from('guests')
+    .update({
+      confirmed: true,
+      attending_events: events,
+      companion: companion || '',
+      confirmed_at: new Date().toISOString()
+    })
+    .eq('id', guestId)
+    .select()
+    .single();
 
-  guests[index] = {
-    ...guests[index],
-    confirmed: true,
-    attendingEvents: events,
-    companion: companion || '',
-    confirmedAt: new Date().toISOString(),
-  };
+  if (error || !data) return null;
 
-  if (typeof window !== 'undefined') {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(guests));
+  return mapDbGuestToGuest(data);
+}
+
+export async function getConfirmedGuests(): Promise<Guest[]> {
+  const { data, error } = await supabase
+    .from('guests')
+    .select('*')
+    .eq('confirmed', true);
+
+  if (error || !data) return [];
+
+  return data.map(mapDbGuestToGuest);
+}
+
+export async function getGuestStats() {
+  const { data, error } = await supabase.from('guests').select('*');
+  
+  if (error || !data) {
+    return { total: 0, confirmed: 0, pending: 0 };
   }
-  return guests[index];
-}
 
-export function getConfirmedGuests(): Guest[] {
-  return initGuests().filter(g => g.confirmed);
-}
-
-export function getGuestStats() {
-  const guests = initGuests();
   return {
-    total: guests.length,
-    confirmed: guests.filter(g => g.confirmed).length,
-    pending: guests.filter(g => !g.confirmed).length,
+    total: data.length,
+    confirmed: data.filter(g => g.confirmed).length,
+    pending: data.filter(g => !g.confirmed).length,
+  };
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function mapDbGuestToGuest(row: any): Guest {
+  return {
+    id: row.id,
+    fullName: row.full_name,
+    plusOne: row.plus_one,
+    companion: row.companion || '',
+    attendingEvents: row.attending_events || [],
+    confirmed: row.confirmed,
+    confirmedAt: row.confirmed_at || '',
   };
 }
