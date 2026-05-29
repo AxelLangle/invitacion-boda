@@ -10,6 +10,7 @@ function normalizeString(str: string): string {
 }
 
 export async function getAllGuests(): Promise<Guest[]> {
+  if (!supabase) return [];
   const { data, error } = await supabase
     .from('guests')
     .select('*')
@@ -21,6 +22,7 @@ export async function getAllGuests(): Promise<Guest[]> {
 }
 
 export async function findGuest(name: string): Promise<Guest | null> {
+  if (!supabase) return null;
   const { data, error } = await supabase
     .from('guests')
     .select('*');
@@ -38,6 +40,7 @@ export async function confirmAttendance(
   events: EventType[],
   companion?: string
 ): Promise<Guest | null> {
+  if (!supabase) return null;
   const { data, error } = await supabase
     .from('guests')
     .update({
@@ -56,6 +59,7 @@ export async function confirmAttendance(
 }
 
 export async function getConfirmedGuests(): Promise<Guest[]> {
+  if (!supabase) return [];
   const { data, error } = await supabase
     .from('guests')
     .select('*')
@@ -67,6 +71,7 @@ export async function getConfirmedGuests(): Promise<Guest[]> {
 }
 
 export async function getGuestStats() {
+  if (!supabase) return { total: 0, confirmed: 0, pending: 0 };
   const { data, error } = await supabase.from('guests').select('*');
   
   if (error || !data) {

@@ -24,12 +24,12 @@ export default function InvitacionPage() {
         {/* Hero Section — Photo emerging from envelope */}
         <HeroSection />
 
-        <SectionDivider icon="♫" />
+        <SectionDivider />
 
         {/* Music Player */}
         <MusicPlayer />
 
-        <SectionDivider icon="❤" />
+        <SectionDivider />
 
         {/* Secondary Photo */}
         <SecondaryPhoto />
@@ -37,27 +37,27 @@ export default function InvitacionPage() {
         {/* Calendar Button */}
         <CalendarButton />
 
-        <SectionDivider icon="✦" />
+        <SectionDivider />
 
         {/* Timeline / Itinerary */}
         <Timeline />
 
-        <SectionDivider icon="👗" />
+        <SectionDivider />
 
         {/* Dress Code */}
         <DressCode />
 
-        <SectionDivider icon="🎁" />
+        <SectionDivider />
 
         {/* Gifts Section */}
         <GiftsSection />
 
-        <SectionDivider icon="⏳" />
+        <SectionDivider />
 
         {/* Countdown */}
         <Countdown />
 
-        <SectionDivider icon="💌" />
+        <SectionDivider />
 
         {/* RSVP Form */}
         <RSVPForm />
@@ -79,7 +79,7 @@ export default function InvitacionPage() {
             className="text-xs text-[#6B6B6B]/50 mt-1"
             style={{ fontFamily: "Lato, sans-serif" }}
           >
-            04 de agosto de 2026
+            04/08/2026
           </p>
         </footer>
       </div>

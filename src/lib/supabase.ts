@@ -4,7 +4,14 @@ import { AdminSettings } from '@/types';
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 
-export const supabase = createClient(supabaseUrl, supabaseKey);
+function getSupabaseClient() {
+  if (!supabaseUrl || !supabaseKey) {
+    return null;
+  }
+  return createClient(supabaseUrl, supabaseKey);
+}
+
+export const supabase = getSupabaseClient();
 
 const DEFAULT_SETTINGS: AdminSettings = {
   heroPhotoUrl: '',
@@ -14,6 +21,7 @@ const DEFAULT_SETTINGS: AdminSettings = {
 
 export async function getAdminSettings(): Promise<AdminSettings> {
   try {
+    if (!supabase) return DEFAULT_SETTINGS;
     const { data, error } = await supabase
       .from('admin_settings')
       .select('*')
@@ -35,6 +43,7 @@ export async function getAdminSettings(): Promise<AdminSettings> {
 
 export async function saveAdminSettings(settings: AdminSettings): Promise<void> {
   try {
+    if (!supabase) return;
     await supabase
       .from('admin_settings')
       .upsert({

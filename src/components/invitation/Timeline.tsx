@@ -58,7 +58,7 @@ export default function Timeline() {
       >
         <p
           className="text-[#6B6B6B] text-sm tracking-[0.25em] uppercase mb-3"
-          style={{ fontFamily: "Lato, sans-serif" }}
+          style={{ fontFamily: "var(--font-timeline), Montserrat, sans-serif" }}
         >
           Itinerario del día
         </p>
@@ -106,7 +106,7 @@ export default function Timeline() {
               {/* Time badge */}
               <span
                 className="inline-block text-xs font-semibold text-[#D4A853] tracking-[0.2em] uppercase mb-2 bg-[#D4A853]/10 px-3 py-1 rounded-full"
-                style={{ fontFamily: "Lato, sans-serif" }}
+                style={{ fontFamily: "var(--font-timeline), Montserrat, sans-serif" }}
               >
                 {event.time}
               </span>
@@ -115,7 +115,7 @@ export default function Timeline() {
               <h3
                 className="text-xl md:text-2xl text-[#2D2D2D] mb-2"
                 style={{
-                  fontFamily: '"Cormorant Garamond", serif',
+                  fontFamily: "var(--font-timeline), Montserrat, sans-serif",
                   fontWeight: 600,
                 }}
               >
@@ -128,7 +128,7 @@ export default function Timeline() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-sm text-[#6B6B6B] hover:text-[#D4A853] transition-colors duration-200 mb-1"
-                style={{ fontFamily: "Lato, sans-serif" }}
+                style={{ fontFamily: "var(--font-timeline), Montserrat, sans-serif" }}
               >
                 <MapPin className="w-3.5 h-3.5" />
                 {event.locationName}
@@ -136,7 +136,7 @@ export default function Timeline() {
 
               <p
                 className="text-xs text-[#6B6B6B]/60 mb-3"
-                style={{ fontFamily: "Lato, sans-serif" }}
+                style={{ fontFamily: "var(--font-timeline), Montserrat, sans-serif" }}
               >
                 {event.coordinates}
               </p>
@@ -154,7 +154,7 @@ export default function Timeline() {
                     <AlertCircle className="w-4 h-4 text-[#800020] mt-0.5 flex-shrink-0" />
                     <p
                       className="text-xs md:text-sm text-[#800020]/80 leading-relaxed"
-                      style={{ fontFamily: "Lato, sans-serif" }}
+                      style={{ fontFamily: "var(--font-timeline), Montserrat, sans-serif" }}
                     >
                       {event.note}
                     </p>

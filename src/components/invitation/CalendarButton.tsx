@@ -2,9 +2,11 @@
 
 import { motion } from "motion/react";
 import { CalendarPlus } from "lucide-react";
-import { downloadICS } from "@/lib/calendar";
+import { getGoogleCalendarUrl } from "@/lib/calendar";
 
 export default function CalendarButton() {
+  const calendarUrl = getGoogleCalendarUrl();
+
   return (
     <motion.section
       className="py-8 flex justify-center px-4"
@@ -13,9 +15,11 @@ export default function CalendarButton() {
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
     >
-      <motion.button
-        onClick={downloadICS}
-        className="group flex items-center gap-3 px-8 py-4 bg-[#800020] text-[#FFFFF0] rounded-2xl shadow-lg shadow-[#800020]/20 hover:shadow-xl hover:shadow-[#800020]/30 transition-all duration-300"
+      <motion.a
+        href={calendarUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group flex items-center gap-3 px-8 py-4 bg-[#800020] text-[#FFFFF0] rounded-2xl shadow-lg shadow-[#800020]/20 hover:shadow-xl hover:shadow-[#800020]/30 transition-all duration-300 no-underline"
         whileHover={{ scale: 1.03, y: -2 }}
         whileTap={{ scale: 0.98 }}
       >
@@ -30,7 +34,7 @@ export default function CalendarButton() {
         >
           Añádelo a tu calendario
         </span>
-      </motion.button>
+      </motion.a>
     </motion.section>
   );
 }

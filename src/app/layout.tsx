@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Lato } from "next/font/google";
+import { Cormorant_Garamond, Lato, Montserrat } from "next/font/google";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -14,6 +14,13 @@ const lato = Lato({
   variable: "--font-body",
   subsets: ["latin", "latin-ext"],
   weight: ["300", "400", "700"],
+  display: "swap",
+});
+
+const montserrat = Montserrat({
+  variable: "--font-timeline",
+  subsets: ["latin", "latin-ext"],
+  weight: ["300", "400", "500", "600"],
   display: "swap",
 });
 
@@ -37,9 +44,9 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${cormorant.variable} ${lato.variable} h-full antialiased`}
+      className={`${cormorant.variable} ${lato.variable} ${montserrat.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#FFFFF0] text-[#2D2D2D]">
+      <body className="min-h-full flex flex-col bg-[#FFFFFF] text-[#2D2D2D]">
         {children}
       </body>
     </html>

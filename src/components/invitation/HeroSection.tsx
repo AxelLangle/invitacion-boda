@@ -76,7 +76,7 @@ export default function HeroSection() {
             className="text-[#2D2D2D] tracking-widest text-lg"
             style={{ fontFamily: "Lato, sans-serif" }}
           >
-            04 · 08 · 2026
+            04/08/2026
           </p>
           <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#D4A853]" />
         </div>
