@@ -51,14 +51,12 @@ export default function DressCode() {
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
         >
-          <Sparkles className="w-5 h-5 text-[#D4A853] shrink-0 mt-0.5" />
           <p
             className="text-[#2D2D2D] leading-relaxed italic"
             style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: "1.1rem" }}
           >
             Nos encantará celebrar este día con ustedes.
           </p>
-          <Sparkles className="w-5 h-5 text-[#D4A853] shrink-0 mt-0.5" />
         </motion.div>
 
         {/* Divider */}
@@ -86,7 +84,7 @@ export default function DressCode() {
 
             <ul className="space-y-3">
               <li className="flex items-start gap-2">
-                <span className="text-[#D4A853] mt-0.5 shrink-0">✦</span>
+                <span className="text-[#D4A853] mt-0.5 shrink-0 text-lg leading-none">•</span>
                 <p
                   className="text-sm text-[#4A4A4A] leading-relaxed"
                   style={{ fontFamily: "Lato, sans-serif" }}
@@ -95,7 +93,7 @@ export default function DressCode() {
                 </p>
               </li>
               <li className="flex items-start gap-2">
-                <Ban className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+                <span className="text-[#D4A853] mt-0.5 shrink-0 text-lg leading-none">•</span>
                 <p
                   className="text-sm text-[#4A4A4A] leading-relaxed"
                   style={{ fontFamily: "Lato, sans-serif" }}
@@ -138,7 +136,7 @@ export default function DressCode() {
 
             <ul className="space-y-3">
               <li className="flex items-start gap-2">
-                <span className="text-[#D4A853] mt-0.5 shrink-0">✦</span>
+                <span className="text-[#D4A853] mt-0.5 shrink-0 text-lg leading-none">•</span>
                 <p
                   className="text-sm text-[#4A4A4A] leading-relaxed"
                   style={{ fontFamily: "Lato, sans-serif" }}
@@ -147,7 +145,7 @@ export default function DressCode() {
                 </p>
               </li>
               <li className="flex items-start gap-2">
-                <Ban className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+                <span className="text-[#D4A853] mt-0.5 shrink-0 text-lg leading-none">•</span>
                 <p
                   className="text-sm text-[#4A4A4A] leading-relaxed"
                   style={{ fontFamily: "Lato, sans-serif" }}
@@ -189,14 +187,12 @@ export default function DressCode() {
           viewport={{ once: true }}
           transition={{ delay: 0.5 }}
         >
-          <Heart className="w-4 h-4 text-[#D4A0A0] fill-[#D4A0A0]/40 shrink-0" />
           <p
             className="text-[#6B6B6B] italic leading-relaxed"
             style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: "1.05rem" }}
           >
             Gracias por acompañarnos en este día tan especial.
           </p>
-          <Heart className="w-4 h-4 text-[#D4A0A0] fill-[#D4A0A0]/40 shrink-0" />
         </motion.div>
 
       </div>
