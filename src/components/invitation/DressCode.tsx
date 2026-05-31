@@ -1,17 +1,18 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Ban } from "lucide-react";
+import { Ban, Sparkles, Heart } from "lucide-react";
 
 export default function DressCode() {
   return (
     <motion.section
-      className="py-16 px-4 max-w-lg mx-auto"
+      className="py-16 px-4 max-w-2xl mx-auto"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ type: "spring", stiffness: 100, damping: 20 }}
     >
+      {/* Título */}
       <div className="text-center mb-10">
         <p
           className="text-[#6B6B6B] text-sm tracking-[0.25em] uppercase mb-3"
@@ -29,61 +30,177 @@ export default function DressCode() {
         >
           Dress Code
         </h2>
+        <p
+          className="mt-3 text-xl md:text-2xl text-[#D4A853] tracking-widest"
+          style={{
+            fontFamily: '"Cormorant Garamond", serif',
+            fontWeight: 500,
+          }}
+        >
+          Semi Formal
+        </p>
       </div>
 
-      <div className="glass-card p-8 md:p-10">
-        {/* Color restrictions */}
-        <div className="flex justify-center gap-8 md:gap-12 mb-8">
-          {/* No all-black */}
-          <motion.div
-            className="flex flex-col items-center gap-3"
-            whileHover={{ scale: 1.05 }}
+      <div className="glass-card p-8 md:p-10 space-y-8">
+
+        {/* Intro */}
+        <motion.div
+          className="flex items-start gap-3 text-center justify-center"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+        >
+          <Sparkles className="w-5 h-5 text-[#D4A853] shrink-0 mt-0.5" />
+          <p
+            className="text-[#2D2D2D] leading-relaxed italic"
+            style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: "1.1rem" }}
           >
-            <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#1a1a1a] shadow-lg flex items-center justify-center">
-              <Ban className="w-10 h-10 md:w-12 md:h-12 text-red-500/80" />
+            Nos encantará celebrar este día con ustedes.
+          </p>
+          <Sparkles className="w-5 h-5 text-[#D4A853] shrink-0 mt-0.5" />
+        </motion.div>
+
+        {/* Divider */}
+        <div className="h-px w-32 bg-gradient-to-r from-transparent via-[#D4A853]/40 to-transparent mx-auto" />
+
+        {/* Dos columnas: Hombres y Mujeres */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+          {/* Hombres */}
+          <motion.div
+            className="rounded-2xl bg-white/40 border border-[#D4A853]/15 p-6 space-y-4"
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3, type: "spring", stiffness: 120 }}
+          >
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-2xl">🤵</span>
+              <h3
+                className="text-xl text-[#2D2D2D]"
+                style={{ fontFamily: '"Cormorant Garamond", serif', fontWeight: 600 }}
+              >
+                Hombres
+              </h3>
             </div>
-            <p
-              className="text-xs text-[#6B6B6B] tracking-wide uppercase"
-              style={{ fontFamily: "Lato, sans-serif" }}
-            >
-              No todo negro
-            </p>
+
+            <ul className="space-y-3">
+              <li className="flex items-start gap-2">
+                <span className="text-[#D4A853] mt-0.5 shrink-0">✦</span>
+                <p
+                  className="text-sm text-[#4A4A4A] leading-relaxed"
+                  style={{ fontFamily: "Lato, sans-serif" }}
+                >
+                  Camisa y pantalón de vestir o un atuendo semi formal.
+                </p>
+              </li>
+              <li className="flex items-start gap-2">
+                <Ban className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+                <p
+                  className="text-sm text-[#4A4A4A] leading-relaxed"
+                  style={{ fontFamily: "Lato, sans-serif" }}
+                >
+                  Evitar asistir completamente de negro.
+                </p>
+              </li>
+            </ul>
+
+            {/* Muestra de color prohibido */}
+            <div className="flex items-center gap-2 pt-1">
+              <div className="w-7 h-7 rounded-full bg-[#0a0a0a] border border-gray-600 shadow-inner relative flex items-center justify-center">
+                <Ban className="w-4 h-4 text-red-400 absolute" />
+              </div>
+              <p
+                className="text-xs text-[#6B6B6B] uppercase tracking-wider"
+                style={{ fontFamily: "Lato, sans-serif" }}
+              >
+                No todo negro
+              </p>
+            </div>
           </motion.div>
 
-          {/* No all-white */}
+          {/* Mujeres */}
           <motion.div
-            className="flex flex-col items-center gap-3"
-            whileHover={{ scale: 1.05 }}
+            className="rounded-2xl bg-white/40 border border-[#D4A853]/15 p-6 space-y-4"
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4, type: "spring", stiffness: 120 }}
           >
-            <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-full bg-white border-2 border-gray-200 shadow-lg flex items-center justify-center">
-              <Ban className="w-10 h-10 md:w-12 md:h-12 text-red-500/80" />
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-2xl">👗</span>
+              <h3
+                className="text-xl text-[#2D2D2D]"
+                style={{ fontFamily: '"Cormorant Garamond", serif', fontWeight: 600 }}
+              >
+                Mujeres
+              </h3>
             </div>
-            <p
-              className="text-xs text-[#6B6B6B] tracking-wide uppercase"
-              style={{ fontFamily: "Lato, sans-serif" }}
-            >
-              No todo blanco
-            </p>
+
+            <ul className="space-y-3">
+              <li className="flex items-start gap-2">
+                <span className="text-[#D4A853] mt-0.5 shrink-0">✦</span>
+                <p
+                  className="text-sm text-[#4A4A4A] leading-relaxed"
+                  style={{ fontFamily: "Lato, sans-serif" }}
+                >
+                  Vestido, conjunto o atuendo semi formal.
+                </p>
+              </li>
+              <li className="flex items-start gap-2">
+                <Ban className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+                <p
+                  className="text-sm text-[#4A4A4A] leading-relaxed"
+                  style={{ fontFamily: "Lato, sans-serif" }}
+                >
+                  Evitar prendas en color blanco o tonos muy claros similares al blanco (marfil, ivory, crema muy clara, etc.).
+                </p>
+              </li>
+            </ul>
+
+            {/* Paleta de colores prohibidos */}
+            <div className="flex items-center gap-2 pt-1">
+              {["#FFFFFF", "#FFFFF0", "#FFFFF5", "#F8F8F0"].map((color, i) => (
+                <div
+                  key={i}
+                  className="w-7 h-7 rounded-full border border-gray-300 shadow-inner relative flex items-center justify-center"
+                  style={{ backgroundColor: color }}
+                >
+                  {i === 0 && <Ban className="w-4 h-4 text-red-400 absolute" />}
+                </div>
+              ))}
+              <p
+                className="text-xs text-[#6B6B6B] uppercase tracking-wider"
+                style={{ fontFamily: "Lato, sans-serif" }}
+              >
+                No blanco / marfil
+              </p>
+            </div>
           </motion.div>
         </div>
 
         {/* Divider */}
-        <div className="h-px w-24 bg-gradient-to-r from-transparent via-[#D4A853]/40 to-transparent mx-auto mb-8" />
+        <div className="h-px w-32 bg-gradient-to-r from-transparent via-[#D4A853]/40 to-transparent mx-auto" />
 
-        {/* Quote */}
-        <motion.p
-          className="text-center text-lg md:text-xl text-[#2D2D2D] leading-relaxed"
-          style={{
-            fontFamily: '"Cormorant Garamond", serif',
-            fontStyle: "italic",
-          }}
+        {/* Cierre */}
+        <motion.div
+          className="flex items-center justify-center gap-3 text-center"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.3, duration: 0.8 }}
+          transition={{ delay: 0.5 }}
         >
-          &ldquo;No se exige formalidad.&rdquo;
-        </motion.p>
+          <Heart className="w-4 h-4 text-[#D4A0A0] fill-[#D4A0A0]/40 shrink-0" />
+          <p
+            className="text-[#6B6B6B] italic leading-relaxed"
+            style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: "1.05rem" }}
+          >
+            Gracias por acompañarnos en este día tan especial.
+          </p>
+          <Heart className="w-4 h-4 text-[#D4A0A0] fill-[#D4A0A0]/40 shrink-0" />
+        </motion.div>
+
       </div>
     </motion.section>
   );
