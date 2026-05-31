@@ -76,7 +76,6 @@ export default function DressCode() {
             transition={{ delay: 0.3, type: "spring", stiffness: 120 }}
           >
             <div className="flex items-center gap-2 mb-2">
-              <span className="text-2xl">🤵</span>
               <h3
                 className="text-xl text-[#2D2D2D]"
                 style={{ fontFamily: '"Cormorant Garamond", serif', fontWeight: 600 }}
@@ -129,7 +128,6 @@ export default function DressCode() {
             transition={{ delay: 0.4, type: "spring", stiffness: 120 }}
           >
             <div className="flex items-center gap-2 mb-2">
-              <span className="text-2xl">👗</span>
               <h3
                 className="text-xl text-[#2D2D2D]"
                 style={{ fontFamily: '"Cormorant Garamond", serif', fontWeight: 600 }}
@@ -160,7 +158,7 @@ export default function DressCode() {
             </ul>
 
             {/* Paleta de colores prohibidos */}
-            <div className="flex items-center gap-2 pt-1">
+            <div className="flex items-center gap-2 pt-1 bg-black/5 p-2 rounded-lg inline-flex">
               {["#FFFFFF", "#FFFFF0", "#FFFFF5", "#F8F8F0"].map((color, i) => (
                 <div
                   key={i}
