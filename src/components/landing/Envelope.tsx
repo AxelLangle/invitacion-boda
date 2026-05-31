@@ -14,46 +14,47 @@ export default function Envelope() {
     if (isOpening) return;
     setIsOpening(true);
 
-    // Mostrar sobre abierto al medio de la animación
+    // Cambiar a sobre abierto
     setTimeout(() => {
       setShowOpen(true);
-    }, 400);
+    }, 350);
 
-    // Navegar a la invitación
+    // Navegar después de mostrar el sobre abierto
     setTimeout(() => {
       router.push("/invitacion");
-    }, 1800);
+    }, 1600);
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden bg-white">
+    <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden bg-white px-4">
 
+      {/* Estado: Sobre cerrado */}
       <AnimatePresence>
         {!isOpening && (
           <motion.div
-            key="closed-state"
-            className="relative z-10 flex flex-col items-center cursor-pointer select-none"
+            key="closed"
+            className="flex flex-col items-center cursor-pointer select-none"
             onClick={handleOpen}
-            exit={{ opacity: 0, scale: 0.9, y: -40 }}
-            transition={{ duration: 0.6, ease: [0.6, 0.05, 0.01, 0.9] }}
+            exit={{ opacity: 0, scale: 0.92 }}
+            transition={{ duration: 0.35, ease: "easeIn" }}
           >
-            {/* Sobre cerrado */}
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, ease: "easeOut" }}
-              whileHover={{ y: -8, transition: { duration: 0.4, ease: "easeOut" } }}
-              className="relative"
-              style={{ width: "min(90vw, 400px)" }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              whileHover={{ y: -6, transition: { duration: 0.35, ease: "easeOut" } }}
             >
               <Image
                 src="/images/sobre-cerrado.png"
                 alt="Sobre cerrado — Axel & Nahomi"
                 width={480}
                 height={560}
+                sizes="(max-width: 640px) 90vw, 480px"
                 style={{
-                  width: "100%",
+                  width: "auto",
                   height: "auto",
+                  maxWidth: "min(90vw, 480px)",
+                  maxHeight: "70vh",
                   objectFit: "contain",
                   display: "block",
                 }}
@@ -62,9 +63,8 @@ export default function Envelope() {
               />
             </motion.div>
 
-            {/* "Toca para abrir" */}
             <motion.p
-              className="mt-8 text-[#6B6B6B] text-sm tracking-[0.2em] uppercase"
+              className="mt-6 text-[#6B6B6B] text-sm tracking-[0.22em] uppercase"
               style={{ fontFamily: "Lato, sans-serif" }}
               animate={{ opacity: [0.35, 1, 0.35] }}
               transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
@@ -75,30 +75,32 @@ export default function Envelope() {
         )}
       </AnimatePresence>
 
-      {/* Sobre abierto — aparece al hacer clic */}
+      {/* Estado: Sobre abierto */}
       <AnimatePresence>
         {showOpen && (
           <motion.div
-            key="open-state"
-            className="fixed inset-0 flex items-center justify-center z-40 bg-white"
+            key="open"
+            className="fixed inset-0 flex items-center justify-center bg-white z-40"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.4 }}
           >
             <motion.div
-              initial={{ scale: 0.85, opacity: 0, y: 20 }}
-              animate={{ scale: 1.05, opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: "easeOut" }}
-              style={{ width: "min(90vw, 400px)" }}
+              initial={{ scale: 0.88, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
             >
               <Image
                 src="/images/sobre-abierto.png"
                 alt="Sobre abierto — Axel & Nahomi"
                 width={480}
                 height={700}
+                sizes="(max-width: 640px) 90vw, 480px"
                 style={{
-                  width: "100%",
+                  width: "auto",
                   height: "auto",
+                  maxWidth: "min(90vw, 480px)",
+                  maxHeight: "80vh",
                   objectFit: "contain",
                   display: "block",
                 }}
@@ -110,15 +112,15 @@ export default function Envelope() {
         )}
       </AnimatePresence>
 
-      {/* Fade-out blanco final antes de redirigir */}
+      {/* Fade blanco final antes de redirigir */}
       <AnimatePresence>
-        {isOpening && (
+        {showOpen && (
           <motion.div
-            key="fade-overlay"
+            key="fade"
             className="fixed inset-0 bg-white z-50 pointer-events-none"
             initial={{ opacity: 0 }}
-            animate={{ opacity: showOpen ? 1 : 0 }}
-            transition={{ delay: showOpen ? 0.9 : 0, duration: 0.6 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8, duration: 0.5 }}
           />
         )}
       </AnimatePresence>
