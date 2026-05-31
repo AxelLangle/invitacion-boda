@@ -54,7 +54,7 @@ export default function MusicPlayer() {
 
       <motion.button
         onClick={togglePlay}
-        className="relative w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#800020] text-[#FFFFF0] shadow-lg shadow-[#800020]/20 flex items-center justify-center hover:shadow-xl hover:shadow-[#800020]/30 transition-shadow duration-300"
+        className="relative w-16 h-16 md:w-20 md:h-20 rounded-full bg-black text-white shadow-lg shadow-black/20 flex items-center justify-center hover:shadow-xl hover:shadow-black/30 transition-shadow duration-300"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         aria-label={isPlaying ? "Pausar música" : "Reproducir música"}
@@ -62,7 +62,7 @@ export default function MusicPlayer() {
         {/* Rotating ring when playing */}
         {isPlaying && (
           <motion.div
-            className="absolute inset-0 rounded-full border-2 border-[#D4A853]/40 border-t-[#D4A853]"
+            className="absolute inset-0 rounded-full border-2 border-white/20 border-t-white"
             animate={{ rotate: 360 }}
             transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
           />
@@ -71,7 +71,7 @@ export default function MusicPlayer() {
         {/* Pulse effect when playing */}
         {isPlaying && (
           <motion.div
-            className="absolute inset-0 rounded-full bg-[#800020]/30"
+            className="absolute inset-0 rounded-full bg-black/30"
             animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0, 0.5] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           />
