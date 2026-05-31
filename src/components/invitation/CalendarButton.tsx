@@ -19,7 +19,7 @@ export default function CalendarButton() {
         href={calendarUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="group flex items-center gap-3 px-8 py-4 bg-[#800020] text-[#FFFFF0] rounded-2xl shadow-lg shadow-[#800020]/20 hover:shadow-xl hover:shadow-[#800020]/30 transition-all duration-300 no-underline"
+        className="group flex items-center gap-3 px-8 py-4 bg-black text-white rounded-2xl shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-black/30 transition-all duration-300 no-underline"
         whileHover={{ scale: 1.03, y: -2 }}
         whileTap={{ scale: 0.98 }}
       >
