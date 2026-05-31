@@ -57,7 +57,7 @@ export default function GiftsSection() {
           rel="noopener noreferrer"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#800020] text-white tracking-widest uppercase text-sm shadow-xl hover:bg-[#800020]/90 transition-colors"
+          className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-black text-white tracking-widest uppercase text-sm shadow-xl hover:bg-black/90 transition-colors"
           style={{ fontFamily: "Lato, sans-serif" }}
         >
           Ver Mesa de Regalos
