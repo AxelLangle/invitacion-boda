@@ -136,7 +136,7 @@ export default function RSVPForm() {
                 whileTap={{ scale: 0.98 }}
                 onClick={handleLookup}
                 disabled={!name.trim() || isSearching}
-                className="w-full mt-5 py-3 rounded-xl bg-[#800020] text-white tracking-wider uppercase text-sm shadow-lg hover:bg-[#800020]/90 transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full mt-5 py-3 rounded-xl bg-black text-white tracking-wider uppercase text-sm shadow-lg hover:bg-black/90 transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 style={{ fontFamily: "Lato, sans-serif" }}
               >
                 {isSearching ? (
@@ -248,7 +248,7 @@ export default function RSVPForm() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={handlePlusOneNext}
-                className="w-full mt-5 py-3 rounded-xl bg-[#800020] text-white tracking-wider uppercase text-sm shadow-lg hover:bg-[#800020]/90 transition-colors flex items-center justify-center gap-2"
+                className="w-full mt-5 py-3 rounded-xl bg-black text-white tracking-wider uppercase text-sm shadow-lg hover:bg-black/90 transition-colors flex items-center justify-center gap-2"
                 style={{ fontFamily: "Lato, sans-serif" }}
               >
                 Continuar
@@ -308,7 +308,7 @@ export default function RSVPForm() {
                 whileTap={{ scale: 0.98 }}
                 onClick={handleSubmit}
                 disabled={selectedEvents.length === 0 || isSubmitting}
-                className="w-full mt-6 py-3 rounded-xl bg-[#800020] text-white tracking-wider uppercase text-sm shadow-lg hover:bg-[#800020]/90 transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full mt-6 py-3 rounded-xl bg-black text-white tracking-wider uppercase text-sm shadow-lg hover:bg-black/90 transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 style={{ fontFamily: "Lato, sans-serif" }}
               >
                 {isSubmitting ? (
