@@ -1,62 +1,74 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion } from "motion/react";
+import Image from "next/image";
 import { getAdminSettings } from "@/lib/supabase";
 
 export default function HeroSection() {
-  const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 500], [0, 150]);
-  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
-
-  const [photoUrl, setPhotoUrl] = useState<string | null>(null);
+  const [heroPhotoUrl, setHeroPhotoUrl] = useState<string | null>(null);
 
   useEffect(() => {
     async function load() {
       const settings = await getAdminSettings();
-      setPhotoUrl(settings.heroPhotoUrl || null);
+      // Si hay foto configurada en admin, la usamos; si no, usamos el sobre abierto
+      setHeroPhotoUrl(settings.heroPhotoUrl || null);
     }
     load();
   }, []);
 
   return (
-    <section className="relative h-[85vh] flex items-center justify-center overflow-hidden">
-      {photoUrl ? (
-        <motion.div
-          className="absolute inset-0 z-0"
-          style={{ y, opacity }}
-          initial={{ scale: 1.1 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-        >
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${photoUrl})` }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#FFFFF0] via-[#FFFFF0]/50 to-transparent" />
-        </motion.div>
-      ) : (
-        <motion.div
-          className="absolute inset-0 z-0 bg-[#F7E7CE]/30 flex items-center justify-center"
-          style={{ y, opacity }}
-        >
-          <p
-            className="text-[#D4A853] text-sm tracking-widest uppercase"
-            style={{ fontFamily: "Lato, sans-serif" }}
-          >
-            [Foto de los Novios]
-          </p>
-        </motion.div>
-      )}
+    <section className="flex flex-col items-center pt-12 pb-4 px-4">
 
+      {/* Imagen: sobre abierto (o foto de novios si está configurada) */}
       <motion.div
-        className="relative z-10 text-center px-4"
-        initial={{ opacity: 0, y: 50 }}
+        className="w-full flex justify-center"
+        initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
+        transition={{ duration: 1, ease: "easeOut" }}
+      >
+        {heroPhotoUrl ? (
+          /* Foto de novios configurada en el admin */
+          <div
+            className="w-full max-w-xl rounded-2xl overflow-hidden shadow-2xl"
+            style={{ aspectRatio: "4/5" }}
+          >
+            <div
+              className="w-full h-full bg-cover bg-center"
+              style={{ backgroundImage: `url(${heroPhotoUrl})` }}
+            />
+          </div>
+        ) : (
+          /* Sobre abierto como placeholder */
+          <Image
+            src="/images/sobre-abierto.png"
+            alt="Invitación de boda — Axel & Nahomi"
+            width={480}
+            height={700}
+            sizes="(max-width: 640px) 90vw, 480px"
+            style={{
+              width: "auto",
+              height: "auto",
+              maxWidth: "min(90vw, 480px)",
+              maxHeight: "75vh",
+              objectFit: "contain",
+              display: "block",
+            }}
+            priority
+            draggable={false}
+          />
+        )}
+      </motion.div>
+
+      {/* Texto debajo de la imagen */}
+      <motion.div
+        className="text-center mt-10 px-4"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, delay: 0.4, ease: "easeOut" }}
       >
         <p
-          className="text-[#6B6B6B] tracking-[0.3em] uppercase text-xs md:text-sm mb-6"
+          className="text-[#6B6B6B] tracking-[0.3em] uppercase text-xs md:text-sm mb-5"
           style={{ fontFamily: "Lato, sans-serif" }}
         >
           Nuestra Boda
@@ -76,11 +88,12 @@ export default function HeroSection() {
             className="text-[#2D2D2D] tracking-widest text-lg"
             style={{ fontFamily: "Lato, sans-serif" }}
           >
-            04/08/2026
+            04 · 08 · 2026
           </p>
           <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#D4A853]" />
         </div>
       </motion.div>
+
     </section>
   );
 }
