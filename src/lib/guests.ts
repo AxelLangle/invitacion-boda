@@ -21,18 +21,24 @@ export async function getAllGuests(): Promise<Guest[]> {
   return data.map(mapDbGuestToGuest);
 }
 
-export async function findGuest(name: string): Promise<Guest | null> {
-  if (!supabase) return null;
+export async function searchGuests(query: string): Promise<Guest[]> {
+  if (!supabase) return [];
   const { data, error } = await supabase
     .from('guests')
     .select('*');
 
-  if (error || !data) return null;
+  if (error || !data) return [];
 
-  const normalized = normalizeString(name);
-  const found = data.find(g => normalizeString(g.full_name) === normalized);
-  
-  return found ? mapDbGuestToGuest(found) : null;
+  const normalizedQueryWords = normalizeString(query)
+    .split(' ')
+    .filter((w) => w.length > 0);
+
+  const matched = data.filter((g) => {
+    const normalizedName = normalizeString(g.full_name);
+    return normalizedQueryWords.every((word) => normalizedName.includes(word));
+  });
+
+  return matched.map(mapDbGuestToGuest);
 }
 
 export async function confirmAttendance(
