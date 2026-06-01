@@ -42,7 +42,7 @@ const events: TimelineItem[] = [
     coordinates: "19°48'12.7\"N 99°03'36.1\"W",
     mapsUrl: "https://www.google.com/maps?q=19.803528,-99.060028",
     icon: "🎉",
-    note: "No habrá comida, solo será pastel y fiesta (alcohol, tabacos, cannabis).",
+    note: "No habrá comida, solo será pastel y fiesta.",
   },
 ];
 
@@ -105,7 +105,7 @@ export default function Timeline() {
             <div className="glass-card p-5 md:p-6 w-full hover:shadow-lg transition-shadow duration-300">
               {/* Time badge */}
               <span
-                className="inline-block text-xs font-semibold text-[#D4A853] tracking-[0.2em] uppercase mb-2 bg-[#D4A853]/10 px-3 py-1 rounded-full"
+                className="inline-block text-xs font-semibold text-gold-metallic tracking-[0.2em] uppercase mb-2 bg-[#D4A853]/10 px-3 py-1 rounded-full pb-1"
                 style={{ fontFamily: "var(--font-timeline), Montserrat, sans-serif" }}
               >
                 {event.time}
@@ -127,7 +127,7 @@ export default function Timeline() {
                 href={event.mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm text-[#6B6B6B] hover:text-[#D4A853] transition-colors duration-200 mb-1"
+                className="inline-flex items-center gap-1.5 text-sm text-[#6B6B6B] hover:text-[#d4af37] transition-colors duration-200 mb-1"
                 style={{ fontFamily: "var(--font-timeline), Montserrat, sans-serif" }}
               >
                 <MapPin className="w-3.5 h-3.5" />

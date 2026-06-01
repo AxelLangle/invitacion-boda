@@ -38,7 +38,7 @@ export default function SecondaryPhoto() {
           ) : (
             <div className="w-full h-full bg-[#F7E7CE] flex items-center justify-center">
               <p
-                className="text-[#D4A853] tracking-widest text-sm uppercase"
+                className="text-gold-metallic tracking-widest text-sm uppercase pb-1"
                 style={{ fontFamily: "Lato, sans-serif" }}
               >
                 [Foto Secundaria]

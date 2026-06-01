@@ -111,21 +111,21 @@ export default function Countdown() {
       <div className="flex justify-center items-start gap-2 md:gap-4">
         <AnimatedDigit value={timeLeft.days} label="Días" />
         <span
-          className="text-2xl md:text-3xl text-[#D4A853] mt-6 md:mt-8"
+          className="text-2xl md:text-3xl text-gold-metallic mt-6 md:mt-8"
           style={{ fontFamily: '"Cormorant Garamond", serif' }}
         >
           :
         </span>
         <AnimatedDigit value={timeLeft.hours} label="Horas" />
         <span
-          className="text-2xl md:text-3xl text-[#D4A853] mt-6 md:mt-8"
+          className="text-2xl md:text-3xl text-gold-metallic mt-6 md:mt-8"
           style={{ fontFamily: '"Cormorant Garamond", serif' }}
         >
           :
         </span>
         <AnimatedDigit value={timeLeft.minutes} label="Min" />
         <span
-          className="text-2xl md:text-3xl text-[#D4A853] mt-6 md:mt-8"
+          className="text-2xl md:text-3xl text-gold-metallic mt-6 md:mt-8"
           style={{ fontFamily: '"Cormorant Garamond", serif' }}
         >
           :
