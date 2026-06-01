@@ -26,7 +26,7 @@ export default function Envelope() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden bg-white px-4">
+    <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden px-4">
 
       {/* Estado: Sobre cerrado */}
       <AnimatePresence>
