@@ -305,15 +305,30 @@ export default function RSVPForm() {
                 style={{ fontFamily: "Lato, sans-serif" }}
               />
 
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={handlePlusOneNext}
-                className="w-full mt-5 py-3 rounded-xl bg-black text-white tracking-wider uppercase text-sm shadow-lg hover:bg-black/90 transition-colors flex items-center justify-center gap-2"
-                style={{ fontFamily: "Lato, sans-serif" }}
-              >
-                Continuar
-              </motion.button>
+              <div className="flex flex-col gap-3 mt-5">
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={handlePlusOneNext}
+                  disabled={!companion.trim()}
+                  className="w-full py-3 rounded-xl bg-black text-white tracking-wider uppercase text-sm shadow-lg hover:bg-black/90 transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  style={{ fontFamily: "Lato, sans-serif" }}
+                >
+                  Continuar con acompañante
+                </motion.button>
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => {
+                    setCompanion("");
+                    handlePlusOneNext();
+                  }}
+                  className="w-full py-3 rounded-xl border border-[#D4A853]/40 bg-transparent text-[#2D2D2D] tracking-wider uppercase text-xs hover:bg-[#D4A853]/10 transition-colors flex items-center justify-center"
+                  style={{ fontFamily: "Lato, sans-serif" }}
+                >
+                  Omitir (Asistiré sin acompañante)
+                </motion.button>
+              </div>
             </motion.div>
           )}
 
