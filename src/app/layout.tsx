@@ -25,13 +25,13 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Boda de Axel & Nahomi — 04.08.2026",
+  title: "Boda de Axel & Nahomi — 04/08/2026",
   description:
-    "Estás cordialmente invitado(a) a la boda de Axel Langle y Nahomi Diaz. 4 de agosto de 2026.",
+    "Estás cordialmente invitado(a) a la boda de Axel Langle y Nahomi Diaz. 04/08/2026.",
   keywords: ["boda", "invitación", "Axel Langle", "Nahomi Diaz", "2026"],
   openGraph: {
     title: "Boda de Axel & Nahomi",
-    description: "04 de agosto de 2026 — ¡Te esperamos!",
+    description: "04/08/2026 — ¡Te esperamos!",
     type: "website",
   },
 };
