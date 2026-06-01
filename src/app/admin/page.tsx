@@ -14,7 +14,7 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#FFFFF0] via-[#F7E7CE] to-[#E8DCC8] px-4 py-8">
+    <div className="min-h-screen px-4 py-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
@@ -32,7 +32,7 @@ export default function AdminPage() {
               className="text-sm text-[#6B6B6B] mt-1"
               style={{ fontFamily: "Lato, sans-serif" }}
             >
-              Boda de Axel & Nahomi — 04.08.2026
+              Boda de Axel & Nahomi — 04/08/2026
             </p>
           </div>
           <button
