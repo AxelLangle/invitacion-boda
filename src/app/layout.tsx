@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Lato, Montserrat } from "next/font/google";
 import "./globals.css";
+import BackgroundManager from "@/components/layout/BackgroundManager";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-heading",
@@ -47,6 +48,7 @@ export default function RootLayout({
       className={`${cormorant.variable} ${lato.variable} ${montserrat.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-[#FFFFFF] text-[#2D2D2D]">
+        <BackgroundManager />
         {children}
       </body>
     </html>
