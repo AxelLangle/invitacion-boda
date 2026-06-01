@@ -31,7 +31,7 @@ export default function DressCode() {
           Dress Code
         </h2>
         <p
-          className="mt-3 text-xl md:text-2xl text-gold-metallic tracking-widest pb-1"
+          className="mt-3 text-xl md:text-2xl text-[#2D2D2D] tracking-widest"
           style={{
             fontFamily: '"Cormorant Garamond", serif',
             fontWeight: 500,
@@ -84,7 +84,7 @@ export default function DressCode() {
 
             <ul className="space-y-3">
               <li className="flex items-start gap-2">
-                <span className="text-gold-metallic mt-0.5 shrink-0 text-lg leading-none pb-1">•</span>
+                <span className="text-[#2D2D2D] mt-0.5 shrink-0 text-lg leading-none">•</span>
                 <p
                   className="text-sm text-[#4A4A4A] leading-relaxed"
                   style={{ fontFamily: "Lato, sans-serif" }}
@@ -93,7 +93,7 @@ export default function DressCode() {
                 </p>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-gold-metallic mt-0.5 shrink-0 text-lg leading-none pb-1">•</span>
+                <span className="text-[#2D2D2D] mt-0.5 shrink-0 text-lg leading-none">•</span>
                 <p
                   className="text-sm text-[#4A4A4A] leading-relaxed"
                   style={{ fontFamily: "Lato, sans-serif" }}

@@ -105,7 +105,7 @@ export default function Timeline() {
             <div className="glass-card p-5 md:p-6 w-full hover:shadow-lg transition-shadow duration-300">
               {/* Time badge */}
               <span
-                className="inline-block text-xs font-semibold text-gold-metallic tracking-[0.2em] uppercase mb-2 bg-[#D4A853]/10 px-3 py-1 rounded-full pb-1"
+                className="inline-block text-xs font-semibold text-[#2D2D2D] tracking-[0.2em] uppercase mb-2 bg-[#D4A853]/10 px-3 py-1 rounded-full"
                 style={{ fontFamily: "var(--font-timeline), Montserrat, sans-serif" }}
               >
                 {event.time}

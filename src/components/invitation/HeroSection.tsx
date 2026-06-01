@@ -58,6 +58,7 @@ export default function HeroSection() {
             }}
             priority
             draggable={false}
+            unoptimized
           />
         )}
       </motion.div>

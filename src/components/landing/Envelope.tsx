@@ -71,6 +71,7 @@ export default function Envelope() {
                 }}
                 priority
                 draggable={false}
+                unoptimized
               />
             </motion.div>
 
