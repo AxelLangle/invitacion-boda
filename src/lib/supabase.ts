@@ -17,6 +17,9 @@ const DEFAULT_SETTINGS: AdminSettings = {
   heroPhotoUrl: '',
   secondaryPhotoUrl: '',
   giftListUrl: '',
+  bgTextureUrl: '',
+  envelopeClosedUrl: '',
+  envelopeOpenUrl: '',
 };
 
 export async function getAdminSettings(): Promise<AdminSettings> {
@@ -34,6 +37,9 @@ export async function getAdminSettings(): Promise<AdminSettings> {
       heroPhotoUrl: data.hero_photo_url || '',
       secondaryPhotoUrl: data.secondary_photo_url || '',
       giftListUrl: data.gift_list_url || '',
+      bgTextureUrl: data.bg_texture_url || '',
+      envelopeClosedUrl: data.envelope_closed_url || '',
+      envelopeOpenUrl: data.envelope_open_url || '',
     };
   } catch (error) {
     console.error("Error fetching settings", error);
@@ -50,7 +56,10 @@ export async function saveAdminSettings(settings: AdminSettings): Promise<void> 
         id: 1,
         hero_photo_url: settings.heroPhotoUrl,
         secondary_photo_url: settings.secondaryPhotoUrl,
-        gift_list_url: settings.giftListUrl
+        gift_list_url: settings.giftListUrl,
+        bg_texture_url: settings.bgTextureUrl,
+        envelope_closed_url: settings.envelopeClosedUrl,
+        envelope_open_url: settings.envelopeOpenUrl
       });
   } catch (error) {
     console.error("Error saving settings", error);
