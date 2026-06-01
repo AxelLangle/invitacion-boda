@@ -7,12 +7,14 @@ import { getAdminSettings } from "@/lib/supabase";
 
 export default function HeroSection() {
   const [heroPhotoUrl, setHeroPhotoUrl] = useState<string | null>(null);
+  const [openUrl, setOpenUrl] = useState<string>("/images/sobre-abierto.png");
 
   useEffect(() => {
     async function load() {
       const settings = await getAdminSettings();
       // Si hay foto configurada en admin, la usamos; si no, usamos el sobre abierto
       setHeroPhotoUrl(settings.heroPhotoUrl || null);
+      if (settings.envelopeOpenUrl) setOpenUrl(settings.envelopeOpenUrl);
     }
     load();
   }, []);
@@ -41,7 +43,7 @@ export default function HeroSection() {
         ) : (
           /* Sobre abierto como placeholder */
           <Image
-            src="/images/sobre-abierto.png"
+            src={openUrl}
             alt="Invitación de boda — Axel & Nahomi"
             width={480}
             height={700}
@@ -80,17 +82,17 @@ export default function HeroSection() {
             fontWeight: 400,
           }}
         >
-          Axel <span className="text-[#D4A853] italic">&</span> Nahomi
+          Axel <span className="text-[#E5B80B] italic">&</span> Nahomi
         </h1>
         <div className="flex items-center justify-center gap-4 mt-6">
-          <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#D4A853]" />
+          <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#E5B80B]" />
           <p
-            className="text-lg md:text-xl tracking-[0.3em] text-[#D4A853] mt-2 font-medium uppercase"
+            className="text-lg md:text-xl tracking-[0.3em] text-[#E5B80B] mt-2 font-medium uppercase"
             style={{ fontFamily: "Lato, sans-serif" }}
           >
             04/08/2026
           </p>
-          <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#D4A853]" />
+          <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#E5B80B]" />
         </div>
       </motion.div>
 
