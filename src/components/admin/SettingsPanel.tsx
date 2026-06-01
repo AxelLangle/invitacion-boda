@@ -11,6 +11,9 @@ export default function SettingsPanel() {
     heroPhotoUrl: "",
     secondaryPhotoUrl: "",
     giftListUrl: "",
+    bgTextureUrl: "",
+    envelopeClosedUrl: "",
+    envelopeOpenUrl: "",
   });
   const [saved, setSaved] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -50,6 +53,24 @@ export default function SettingsPanel() {
       label: "URL de Lista de Regalos",
       placeholder: "https://ejemplo.com/lista-regalos",
       icon: <Gift className="w-4 h-4" />,
+    },
+    {
+      key: "bgTextureUrl" as keyof AdminSettings,
+      label: "URL Textura de Fondo Global",
+      placeholder: "https://ejemplo.com/textura.jpg",
+      icon: <Image className="w-4 h-4" />,
+    },
+    {
+      key: "envelopeClosedUrl" as keyof AdminSettings,
+      label: "URL Imagen Sobre Cerrado",
+      placeholder: "https://ejemplo.com/sobre-cerrado.png",
+      icon: <Image className="w-4 h-4" />,
+    },
+    {
+      key: "envelopeOpenUrl" as keyof AdminSettings,
+      label: "URL Imagen Sobre Abierto",
+      placeholder: "https://ejemplo.com/sobre-abierto.png",
+      icon: <Image className="w-4 h-4" />,
     },
   ];
 
