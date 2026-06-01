@@ -3,15 +3,16 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Search, UserPlus, CheckCircle2, AlertCircle, PartyPopper } from "lucide-react";
-import { findGuest, confirmAttendance } from "@/lib/guests";
+import { searchGuests, confirmAttendance } from "@/lib/guests";
 import { Guest, EventType } from "@/types";
 
-type Step = "lookup" | "plusone" | "events" | "success" | "not-found";
+type Step = "lookup" | "select-guest" | "plusone" | "events" | "success" | "not-found";
 
 export default function RSVPForm() {
   const [step, setStep] = useState<Step>("lookup");
   const [name, setName] = useState("");
   const [guest, setGuest] = useState<Guest | null>(null);
+  const [searchResults, setSearchResults] = useState<Guest[]>([]);
   const [companion, setCompanion] = useState("");
   const [selectedEvents, setSelectedEvents] = useState<EventType[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -25,18 +26,30 @@ export default function RSVPForm() {
 
   const handleLookup = async () => {
     setIsSearching(true);
-    const found = await findGuest(name.trim());
+    const results = await searchGuests(name.trim());
     setIsSearching(false);
     
-    if (found) {
-      setGuest(found);
-      if (found.plusOne) {
+    if (results.length === 1) {
+      setGuest(results[0]);
+      if (results[0].plusOne) {
         setStep("plusone");
       } else {
         setStep("events");
       }
+    } else if (results.length > 1) {
+      setSearchResults(results);
+      setStep("select-guest");
     } else {
       setStep("not-found");
+    }
+  };
+
+  const handleSelectGuest = (selected: Guest) => {
+    setGuest(selected);
+    if (selected.plusOne) {
+      setStep("plusone");
+    } else {
+      setStep("events");
     }
   };
 
@@ -66,6 +79,7 @@ export default function RSVPForm() {
     setStep("lookup");
     setName("");
     setGuest(null);
+    setSearchResults([]);
     setCompanion("");
     setSelectedEvents([]);
   };
@@ -200,6 +214,53 @@ export default function RSVPForm() {
             </motion.div>
           )}
 
+          {/* STEP: Select Guest */}
+          {step === "select-guest" && (
+            <motion.div
+              key="select-guest"
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ type: "spring", stiffness: 200, damping: 25 }}
+            >
+              <h3
+                className="text-2xl text-[#2D2D2D] mb-4 text-center"
+                style={{
+                  fontFamily: '"Cormorant Garamond", serif',
+                  fontWeight: 600,
+                }}
+              >
+                ¿Cuál eres tú?
+              </h3>
+              <p
+                className="text-sm text-[#6B6B6B] mb-6 text-center"
+                style={{ fontFamily: "Lato, sans-serif" }}
+              >
+                Encontramos varias coincidencias con "{name}". Selecciona tu nombre completo:
+              </p>
+              <div className="space-y-3 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
+                {searchResults.map((g) => (
+                  <button
+                    key={g.id}
+                    onClick={() => handleSelectGuest(g)}
+                    className="w-full text-left p-4 rounded-xl border border-[#D4A853]/30 bg-white/50 hover:bg-[#D4A853]/10 hover:border-[#D4A853]/60 transition-all text-[#2D2D2D]"
+                    style={{ fontFamily: "Lato, sans-serif" }}
+                  >
+                    {g.fullName}
+                  </button>
+                ))}
+              </div>
+              <button
+                onClick={handleReset}
+                className="w-full mt-4 py-2 text-sm text-[#6B6B6B] hover:text-[#2D2D2D] transition-colors"
+                style={{ fontFamily: "Lato, sans-serif" }}
+              >
+                Volver a buscar
+              </button>
+            </motion.div>
+          )}
+
           {/* STEP 2: Plus One companion name */}
           {step === "plusone" && (
             <motion.div
@@ -277,7 +338,7 @@ export default function RSVPForm() {
               </p>
 
               <div className="space-y-3">
-                {(["civil", "buffet", "fiesta"] as EventType[]).map((event) => (
+                {(["buffet", "fiesta"] as EventType[]).map((event) => (
                   <motion.button
                     key={event}
                     onClick={() => toggleEvent(event)}
