@@ -66,7 +66,7 @@
 
 body {
   background-color: #FFFFFF;
-  background-image: url("/images/bg-texture.webp");
+  background-image: url("/images/bg-texture.jpg");
   background-repeat: repeat;
   color: var(--foreground);
   font-family: var(--font-body), 'Lato', sans-serif;

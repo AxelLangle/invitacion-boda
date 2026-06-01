@@ -9,6 +9,8 @@ export default function BackgroundManager() {
       const settings = await getAdminSettings();
       if (settings.bgTextureUrl) {
         document.body.style.backgroundImage = `url(${settings.bgTextureUrl})`;
+      } else {
+        document.body.style.backgroundImage = "";
       }
     }
     loadBg();
