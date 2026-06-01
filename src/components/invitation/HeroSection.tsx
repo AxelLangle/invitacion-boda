@@ -85,10 +85,10 @@ export default function HeroSection() {
         <div className="flex items-center justify-center gap-4 mt-6">
           <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#D4A853]" />
           <p
-            className="text-[#2D2D2D] tracking-widest text-lg"
+            className="text-lg md:text-xl tracking-[0.3em] text-[#D4A853] mt-2 font-medium uppercase"
             style={{ fontFamily: "Lato, sans-serif" }}
           >
-            04 · 08 · 2026
+            04/08/2026
           </p>
           <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#D4A853]" />
         </div>
