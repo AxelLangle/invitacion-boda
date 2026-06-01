@@ -6,7 +6,7 @@ import { Search, UserPlus, CheckCircle2, AlertCircle, PartyPopper } from "lucide
 import { searchGuests, confirmAttendance } from "@/lib/guests";
 import { Guest, EventType } from "@/types";
 
-type Step = "lookup" | "select-guest" | "plusone" | "events" | "success" | "not-found";
+type Step = "lookup" | "select-guest" | "plusone" | "events" | "success" | "not-found" | "already-confirmed";
 
 export default function RSVPForm() {
   const [step, setStep] = useState<Step>("lookup");
@@ -31,7 +31,9 @@ export default function RSVPForm() {
     
     if (results.length === 1) {
       setGuest(results[0]);
-      if (results[0].plusOne) {
+      if (results[0].confirmed) {
+        setStep("already-confirmed");
+      } else if (results[0].plusOne) {
         setStep("plusone");
       } else {
         setStep("events");
@@ -46,7 +48,9 @@ export default function RSVPForm() {
 
   const handleSelectGuest = (selected: Guest) => {
     setGuest(selected);
-    if (selected.plusOne) {
+    if (selected.confirmed) {
+      setStep("already-confirmed");
+    } else if (selected.plusOne) {
       setStep("plusone");
     } else {
       setStep("events");
@@ -419,7 +423,7 @@ export default function RSVPForm() {
                 transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
                 className="text-5xl mb-4"
               >
-                <PartyPopper className="w-14 h-14 text-[#D4A853] mx-auto" />
+                <PartyPopper className="w-14 h-14 text-[#2D2D2D] mx-auto" />
               </motion.div>
               <h3
                 className="text-2xl text-[#2D2D2D] mb-2"
@@ -450,6 +454,51 @@ export default function RSVPForm() {
                   .map((e) => eventLabels[e].label.split(" —")[0])
                   .join(", ")}
               </p>
+            </motion.div>
+          )}
+
+          {/* STEP: Already Confirmed */}
+          {step === "already-confirmed" && (
+            <motion.div
+              key="already-confirmed"
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              className="text-center py-8"
+            >
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
+              >
+                <CheckCircle2 className="w-14 h-14 text-[#2D2D2D] mx-auto mb-4" />
+              </motion.div>
+              <h3
+                className="text-2xl text-[#2D2D2D] mb-2"
+                style={{
+                  fontFamily: '"Cormorant Garamond", serif',
+                  fontWeight: 600,
+                }}
+              >
+                ¡Ya estás registrado!
+              </h3>
+              <p
+                className="text-sm text-[#6B6B6B] mb-6"
+                style={{ fontFamily: "Lato, sans-serif" }}
+              >
+                Hola {guest?.fullName}, tu asistencia ya ha sido confirmada previamente.
+                ¡Nos vemos en la boda!
+              </p>
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={handleReset}
+                className="px-6 py-3 rounded-xl border border-[#D4A853]/40 text-[#2D2D2D] text-sm tracking-wider uppercase hover:bg-[#D4A853]/10 transition-colors"
+                style={{ fontFamily: "Lato, sans-serif" }}
+              >
+                Volver
+              </motion.button>
             </motion.div>
           )}
         </AnimatePresence>

@@ -25,8 +25,8 @@ export default function GiftsSection() {
       transition={{ duration: 0.8 }}
     >
       <div className="mb-6 flex justify-center">
-        <div className="w-16 h-16 rounded-full bg-[#D4A853]/10 flex items-center justify-center">
-          <Gift className="w-8 h-8 text-[#D4A853]" />
+        <div className="w-16 h-16 rounded-full bg-[#2D2D2D]/5 flex items-center justify-center">
+          <Gift className="w-8 h-8 text-[#2D2D2D]" />
         </div>
       </div>
 
