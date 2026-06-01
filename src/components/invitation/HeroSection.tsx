@@ -94,6 +94,12 @@ export default function HeroSection() {
           </p>
           <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#d4af37]" />
         </div>
+        <p
+          className="mt-6 text-[#2D2D2D] text-lg font-medium tracking-widest uppercase"
+          style={{ fontFamily: "Lato, sans-serif" }}
+        >
+          Plottwist: ¡Nos vamos a casar!
+        </p>
       </motion.div>
 
     </section>
