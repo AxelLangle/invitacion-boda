@@ -82,17 +82,17 @@ export default function HeroSection() {
             fontWeight: 400,
           }}
         >
-          Axel <span className="text-[#E5B80B] italic">&</span> Nahomi
+          Axel <span className="text-gold-metallic italic pb-1">&</span> Nahomi
         </h1>
         <div className="flex items-center justify-center gap-4 mt-6">
-          <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#E5B80B]" />
+          <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#d4af37]" />
           <p
-            className="text-lg md:text-xl tracking-[0.3em] text-[#E5B80B] mt-2 font-medium uppercase"
+            className="text-lg md:text-xl tracking-[0.3em] text-gold-metallic mt-2 font-medium uppercase pb-1"
             style={{ fontFamily: "Lato, sans-serif" }}
           >
             04/08/2026
           </p>
-          <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#E5B80B]" />
+          <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#d4af37]" />
         </div>
       </motion.div>
 
