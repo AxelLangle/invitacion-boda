@@ -84,27 +84,6 @@ export default function MusicPlayer() {
         )}
       </motion.button>
 
-      {isPlaying && (
-        <motion.div
-          className="flex items-center gap-1"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-        >
-          {[...Array(5)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="w-1 bg-[#D4A853] rounded-full"
-              animate={{ height: [4, 16, 4] }}
-              transition={{
-                duration: 0.8,
-                repeat: Infinity,
-                delay: i * 0.15,
-                ease: "easeInOut",
-              }}
-            />
-          ))}
-        </motion.div>
-      )}
     </motion.section>
   );
 }
