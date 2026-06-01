@@ -4,11 +4,22 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useEffect } from "react";
+import { getAdminSettings } from "@/lib/supabase";
 
 export default function Envelope() {
   const [isOpening, setIsOpening] = useState(false);
   const [showOpen, setShowOpen] = useState(false);
+  const [envelopeClosedUrl, setEnvelopeClosedUrl] = useState<string>("/images/sobre-cerrado.png");
   const router = useRouter();
+
+  useEffect(() => {
+    async function load() {
+      const settings = await getAdminSettings();
+      if (settings.envelopeClosedUrl) setEnvelopeClosedUrl(settings.envelopeClosedUrl);
+    }
+    load();
+  }, []);
 
   const handleOpen = () => {
     if (isOpening) return;
@@ -45,7 +56,7 @@ export default function Envelope() {
               whileHover={{ y: -6, transition: { duration: 0.35, ease: "easeOut" } }}
             >
               <Image
-                src="/images/sobre-cerrado.png"
+                src={envelopeClosedUrl}
                 alt="Sobre cerrado — Axel & Nahomi"
                 width={480}
                 height={560}
