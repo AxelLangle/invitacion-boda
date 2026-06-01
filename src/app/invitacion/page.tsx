@@ -15,7 +15,7 @@ import { Heart } from "lucide-react";
 
 export default function Home() {
   return (
-    <main className="min-h-screen relative bg-gradient-to-b from-[#FFFFF0] via-[#F7E7CE]/30 to-[#FFFFF0]">
+    <main className="min-h-screen relative">
       {/* Background floating elements */}
       <FloatingElements />
 
