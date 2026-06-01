@@ -25,4 +25,7 @@ export interface AdminSettings {
   heroPhotoUrl: string;
   secondaryPhotoUrl: string;
   giftListUrl: string;
+  bgTextureUrl: string;
+  envelopeClosedUrl: string;
+  envelopeOpenUrl: string;
 }
