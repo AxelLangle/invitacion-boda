@@ -45,12 +45,10 @@ export default function GiftsSection() {
         className="text-[#6B6B6B] mb-8 leading-relaxed max-w-md mx-auto"
         style={{ fontFamily: "Lato, sans-serif" }}
       >
-        Su presencia es nuestro mejor regalo. Sin embargo, si desean tener un
-        detalle con nosotros, pueden encontrar nuestra mesa de regalos en el
-        siguiente enlace.
+        Su presencia es nuestro mayor regalo, si quieren tener algun detalle les estaremos agradecidos.
       </p>
 
-      {giftUrl ? (
+      {giftUrl && (
         <motion.a
           href={giftUrl}
           target="_blank"
@@ -63,14 +61,6 @@ export default function GiftsSection() {
           Ver Mesa de Regalos
           <ExternalLink className="w-4 h-4" />
         </motion.a>
-      ) : (
-        <button
-          disabled
-          className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gray-200 text-gray-500 tracking-widest uppercase text-sm cursor-not-allowed"
-          style={{ fontFamily: "Lato, sans-serif" }}
-        >
-          Próximamente
-        </button>
       )}
     </motion.section>
   );
