@@ -64,10 +64,8 @@ export default function Home() {
 
         {/* Footer */}
         <footer className="py-12 text-center">
-          <div className="flex items-center justify-center gap-2 text-[#D4A853] mb-3">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#D4A853]/40" />
-            <Heart className="w-4 h-4 fill-[#D4A853]/30" />
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#D4A853]/40" />
+          <div className="flex items-center justify-center mb-3">
+            <div className="h-px w-24 bg-gradient-to-r from-transparent via-[#D4A853]/40 to-transparent" />
           </div>
           <p
             className="text-sm text-[#6B6B6B]"
