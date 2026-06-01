@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
-import { Save, CheckCircle2, Image, Gift, Link } from "lucide-react";
+import { Save, CheckCircle2, Image, Gift, Link, RefreshCcw } from "lucide-react";
 import { getAdminSettings, saveAdminSettings } from "@/lib/supabase";
 import { AdminSettings } from "@/types";
 
@@ -33,6 +33,21 @@ export default function SettingsPanel() {
     setIsLoading(false);
     setSaved(true);
     setTimeout(() => setSaved(false), 2500);
+  };
+
+  const handleReset = async () => {
+    const emptySettings = {
+      heroPhotoUrl: "",
+      secondaryPhotoUrl: "",
+      giftListUrl: "",
+      bgTextureUrl: "",
+      envelopeClosedUrl: "",
+      envelopeOpenUrl: "",
+    };
+    setSettings(emptySettings);
+    setIsLoading(true);
+    await saveAdminSettings(emptySettings);
+    setIsLoading(false);
   };
 
   const fields = [
@@ -119,36 +134,49 @@ export default function SettingsPanel() {
         ))}
       </div>
 
-      <motion.button
-        onClick={handleSave}
-        disabled={isLoading}
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-        className={`mt-6 px-6 py-3 rounded-xl text-white text-sm tracking-wider uppercase shadow-lg transition-all duration-300 flex items-center gap-2 disabled:opacity-50 ${
-          saved
-            ? "bg-green-600 hover:bg-green-600"
-            : "bg-[#D4A853] hover:bg-[#D4A853]/90"
-        }`}
-        style={{ fontFamily: "Lato, sans-serif" }}
-      >
-        {isLoading ? (
-          <motion.div
-            className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-          />
-        ) : saved ? (
-          <>
-            <CheckCircle2 className="w-4 h-4" />
-            ¡Guardado!
-          </>
-        ) : (
-          <>
-            <Save className="w-4 h-4" />
-            Guardar cambios
-          </>
-        )}
-      </motion.button>
+      <div className="flex flex-col sm:flex-row gap-4 mt-6">
+        <motion.button
+          onClick={handleSave}
+          disabled={isLoading}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          className={`px-6 py-3 rounded-xl text-white text-sm tracking-wider uppercase shadow-lg transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 flex-1 ${
+            saved
+              ? "bg-green-600 hover:bg-green-600"
+              : "bg-[#D4A853] hover:bg-[#D4A853]/90"
+          }`}
+          style={{ fontFamily: "Lato, sans-serif" }}
+        >
+          {isLoading ? (
+            <motion.div
+              className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+            />
+          ) : saved ? (
+            <>
+              <CheckCircle2 className="w-4 h-4" />
+              ¡Guardado!
+            </>
+          ) : (
+            <>
+              <Save className="w-4 h-4" />
+              Guardar cambios
+            </>
+          )}
+        </motion.button>
+        <motion.button
+          onClick={handleReset}
+          disabled={isLoading}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          className="px-6 py-3 rounded-xl border border-[#D4A853]/40 bg-transparent text-[#2D2D2D] text-sm tracking-wider uppercase hover:bg-[#D4A853]/10 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50"
+          style={{ fontFamily: "Lato, sans-serif" }}
+        >
+          <RefreshCcw className="w-4 h-4" />
+          Restablecer defaults
+        </motion.button>
+      </div>
     </motion.div>
   );
 }
