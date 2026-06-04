@@ -11,7 +11,7 @@ export default function SectionDivider() {
       viewport={{ once: true }}
       transition={{ duration: 0.8 }}
     >
-      <div className="w-full max-w-xs h-px bg-gradient-to-r from-transparent via-[#D4A853]/50 to-transparent" />
+      <div className="w-full max-w-xs h-[2px] bg-gradient-to-r from-transparent via-[#2D2D2D] to-transparent" />
     </motion.div>
   );
 }

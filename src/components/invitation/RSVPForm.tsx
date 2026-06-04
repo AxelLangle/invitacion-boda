@@ -3,10 +3,10 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Search, UserPlus, CheckCircle2, AlertCircle, PartyPopper } from "lucide-react";
-import { searchGuests, confirmAttendance } from "@/lib/guests";
+import { searchGuests, confirmAttendance, NetworkError } from "@/lib/guests";
 import { Guest, EventType } from "@/types";
 
-type Step = "lookup" | "select-guest" | "plusone" | "events" | "success" | "not-found" | "already-confirmed";
+type Step = "lookup" | "select-guest" | "plusone" | "events" | "success" | "not-found" | "already-confirmed" | "network-error";
 
 export default function RSVPForm() {
   const [step, setStep] = useState<Step>("lookup");
@@ -17,6 +17,7 @@ export default function RSVPForm() {
   const [selectedEvents, setSelectedEvents] = useState<EventType[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
+  const [networkErrorMsg, setNetworkErrorMsg] = useState("");
 
   const slideVariants = {
     enter: { x: 50, opacity: 0 },
@@ -26,23 +27,33 @@ export default function RSVPForm() {
 
   const handleLookup = async () => {
     setIsSearching(true);
-    const results = await searchGuests(name.trim());
-    setIsSearching(false);
-    
-    if (results.length === 1) {
-      setGuest(results[0]);
-      if (results[0].confirmed) {
-        setStep("already-confirmed");
-      } else if (results[0].plusOne) {
-        setStep("plusone");
+    try {
+      const results = await searchGuests(name.trim());
+      setIsSearching(false);
+
+      if (results.length === 1) {
+        setGuest(results[0]);
+        if (results[0].confirmed) {
+          setStep("already-confirmed");
+        } else if (results[0].plusOne) {
+          setStep("plusone");
+        } else {
+          setStep("events");
+        }
+      } else if (results.length > 1) {
+        setSearchResults(results);
+        setStep("select-guest");
       } else {
-        setStep("events");
+        setStep("not-found");
       }
-    } else if (results.length > 1) {
-      setSearchResults(results);
-      setStep("select-guest");
-    } else {
-      setStep("not-found");
+    } catch (err) {
+      setIsSearching(false);
+      if (err instanceof NetworkError) {
+        setNetworkErrorMsg(err.message);
+      } else {
+        setNetworkErrorMsg("Ocurrió un error inesperado. Intenta de nuevo.");
+      }
+      setStep("network-error");
     }
   };
 
@@ -73,10 +84,19 @@ export default function RSVPForm() {
     if (!guest || selectedEvents.length === 0) return;
     setIsSubmitting(true);
 
-    await confirmAttendance(guest.id, selectedEvents, companion || undefined);
-    
-    setIsSubmitting(false);
-    setStep("success");
+    try {
+      await confirmAttendance(guest.id, selectedEvents, companion || undefined);
+      setIsSubmitting(false);
+      setStep("success");
+    } catch (err) {
+      setIsSubmitting(false);
+      if (err instanceof NetworkError) {
+        setNetworkErrorMsg(err.message);
+      } else {
+        setNetworkErrorMsg("No se pudo guardar tu confirmación. Intenta de nuevo.");
+      }
+      setStep("network-error");
+    }
   };
 
   const handleReset = () => {
@@ -86,6 +106,7 @@ export default function RSVPForm() {
     setSearchResults([]);
     setCompanion("");
     setSelectedEvents([]);
+    setNetworkErrorMsg("");
   };
 
   const eventLabels: Record<EventType, { label: string; icon: string }> = {
@@ -145,7 +166,7 @@ export default function RSVPForm() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Ej: Juan Pérez"
-                className="w-full px-4 py-3 rounded-xl bg-white/50 border border-[#D4A853]/30 text-[#2D2D2D] placeholder:text-[#6B6B6B]/40 focus:outline-none focus:ring-2 focus:ring-[#D4A853]/50 focus:border-[#D4A853]/60 transition-all duration-300"
+                className="w-full px-4 py-3 rounded-xl bg-white/50 border border-[#2D2D2D]/20 text-[#2D2D2D] placeholder:text-[#6B6B6B]/40 focus:outline-none focus:ring-2 focus:ring-[#2D2D2D]/20 focus:border-[#2D2D2D]/30 transition-all duration-300"
                 style={{ fontFamily: "Lato, sans-serif" }}
                 onKeyDown={(e) => e.key === "Enter" && name.trim() && handleLookup()}
               />
@@ -305,7 +326,7 @@ export default function RSVPForm() {
                 value={companion}
                 onChange={(e) => setCompanion(e.target.value)}
                 placeholder="Nombre completo"
-                className="w-full px-4 py-3 rounded-xl bg-white/50 border border-[#D4A853]/30 text-[#2D2D2D] placeholder:text-[#6B6B6B]/40 focus:outline-none focus:ring-2 focus:ring-[#D4A853]/50 transition-all duration-300"
+                className="w-full px-4 py-3 rounded-xl bg-white/50 border border-[#2D2D2D]/20 text-[#2D2D2D] placeholder:text-[#6B6B6B]/40 focus:outline-none focus:ring-2 focus:ring-[#2D2D2D]/20 transition-all duration-300"
                 style={{ fontFamily: "Lato, sans-serif" }}
               />
 
@@ -498,6 +519,51 @@ export default function RSVPForm() {
                 style={{ fontFamily: "Lato, sans-serif" }}
               >
                 Volver
+              </motion.button>
+            </motion.div>
+          )}
+
+          {/* STEP: Network Error */}
+          {step === "network-error" && (
+            <motion.div
+              key="network-error"
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ type: "spring", stiffness: 200, damping: 25 }}
+              className="text-center py-6"
+            >
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
+              >
+                <AlertCircle className="w-12 h-12 text-[#D4A853] mx-auto mb-4" />
+              </motion.div>
+              <h3
+                className="text-xl text-[#2D2D2D] mb-2"
+                style={{
+                  fontFamily: '"Cormorant Garamond", serif',
+                  fontWeight: 600,
+                }}
+              >
+                Error de conexión
+              </h3>
+              <p
+                className="text-sm text-[#6B6B6B] mb-6"
+                style={{ fontFamily: "Lato, sans-serif" }}
+              >
+                {networkErrorMsg}
+              </p>
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={handleReset}
+                className="px-6 py-3 rounded-xl border border-[#D4A853]/40 text-[#2D2D2D] text-sm tracking-wider uppercase hover:bg-[#D4A853]/10 transition-colors"
+                style={{ fontFamily: "Lato, sans-serif" }}
+              >
+                Intentar de nuevo
               </motion.button>
             </motion.div>
           )}

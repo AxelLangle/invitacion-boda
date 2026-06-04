@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 import { getAdminSettings } from "@/lib/supabase";
 
 export default function SecondaryPhoto() {
-  const [photoUrl, setPhotoUrl] = useState<string>("/images/foto-secundaria.jpg");
+  const [photoUrl, setPhotoUrl] = useState<string>("/images/foto-secundaria.jpeg");
 
   useEffect(() => {
     async function load() {
@@ -26,8 +26,7 @@ export default function SecondaryPhoto() {
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 1, ease: "easeOut" }}
       >
-        <div className="absolute -inset-4 border border-[#D4A853]/30 rounded-t-full rounded-b-xl transform -rotate-2" />
-        <div className="absolute -inset-4 border border-[#800020]/20 rounded-t-full rounded-b-xl transform rotate-2" />
+        <div className="absolute -inset-3 border-2 border-[#2D2D2D] rounded-t-full rounded-b-xl" />
 
         <div className="relative aspect-[3/4] md:aspect-square overflow-hidden rounded-t-full rounded-b-xl shadow-2xl">
             <motion.div

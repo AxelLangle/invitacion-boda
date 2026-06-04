@@ -22,7 +22,7 @@ const events: TimelineItem[] = [
     locationName: "Ceremonia Civil",
     coordinates: "19°48'36.3\"N 99°02'39.2\"W",
     mapsUrl: "https://www.google.com/maps?q=19.810083,-99.044222",
-    icon: "📜",
+    icon: "💍",
   },
   {
     id: "buffet",
@@ -41,7 +41,7 @@ const events: TimelineItem[] = [
     locationName: "Lugar de la Fiesta",
     coordinates: "19°48'12.7\"N 99°03'36.1\"W",
     mapsUrl: "https://www.google.com/maps?q=19.803528,-99.060028",
-    icon: "🎉",
+    icon: "🪩",
     note: "No habrá comida, solo será pastel y fiesta.",
   },
 ];
@@ -76,7 +76,7 @@ export default function Timeline() {
 
       <div className="relative">
         {/* Vertical line */}
-        <div className="absolute left-7 md:left-8 top-0 bottom-0 w-px bg-gradient-to-b from-[#D4A853]/10 via-[#D4A853]/40 to-[#D4A853]/10" />
+        <div className="absolute left-[35px] md:left-[51px] top-0 bottom-0 w-[2px] bg-[#2D2D2D]" />
 
         {events.map((event, index) => (
           <motion.div
@@ -92,10 +92,9 @@ export default function Timeline() {
               damping: 15,
             }}
           >
-            {/* Timeline marker */}
             <motion.span
-              className="absolute -left-[52px] md:-left-[56px] flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full bg-[#FFFFF0] border-2 border-[#D4A853]/30 shadow-md text-xl md:text-2xl z-10"
-              whileHover={{ scale: 1.1, borderColor: "#D4A853" }}
+              className="absolute -left-[52px] md:-left-[56px] flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full bg-white border-2 border-[#2D2D2D] shadow-md text-xl md:text-2xl z-10"
+              whileHover={{ scale: 1.1, borderColor: "#000000" }}
               transition={{ duration: 0.2 }}
             >
               {event.icon}

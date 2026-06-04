@@ -60,14 +60,14 @@ export default function DressCode() {
         </motion.div>
 
         {/* Divider */}
-        <div className="h-px w-32 bg-gradient-to-r from-transparent via-[#D4A853]/40 to-transparent mx-auto" />
+        <div className="h-[2px] w-32 bg-gradient-to-r from-transparent via-[#2D2D2D] to-transparent mx-auto" />
 
         {/* Dos columnas: Hombres y Mujeres */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
           {/* Hombres */}
           <motion.div
-            className="rounded-2xl bg-white/40 border border-[#D4A853]/15 p-6 space-y-4"
+            className="rounded-2xl bg-white border-2 border-[#2D2D2D] p-6 space-y-4"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -119,7 +119,7 @@ export default function DressCode() {
 
           {/* Mujeres */}
           <motion.div
-            className="rounded-2xl bg-white/40 border border-[#D4A853]/15 p-6 space-y-4"
+            className="rounded-2xl bg-white border-2 border-[#2D2D2D] p-6 space-y-4"
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -177,7 +177,32 @@ export default function DressCode() {
         </div>
 
         {/* Divider */}
-        <div className="h-px w-32 bg-gradient-to-r from-transparent via-[#D4A853]/40 to-transparent mx-auto" />
+        <div className="h-[2px] w-32 bg-gradient-to-r from-transparent via-[#2D2D2D] to-transparent mx-auto mt-10 mb-6" />
+
+        {/* NO NIÑOS */}
+        <motion.div
+          className="text-center border-2 border-[#2D2D2D] p-6 md:p-8 rounded-2xl mx-auto max-w-md"
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5, type: "spring", stiffness: 120 }}
+        >
+          <h3
+            className="text-2xl text-[#2D2D2D] mb-4 tracking-[0.2em] uppercase"
+            style={{ fontFamily: '"Cormorant Garamond", serif', fontWeight: 600 }}
+          >
+            No Niños
+          </h3>
+          <p
+            className="text-[#2D2D2D] leading-relaxed text-sm tracking-widest uppercase"
+            style={{ fontFamily: "Lato, sans-serif" }}
+          >
+            Agradecemos su comprensión;<br />
+            nuestra<br />
+            celebración ha sido pensada<br />
+            exclusivamente para adultos.
+          </p>
+        </motion.div>
 
         {/* Cierre */}
         <motion.div
